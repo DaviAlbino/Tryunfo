@@ -1,0 +1,13 @@
+.App {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.style-inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: max-content;
+}
