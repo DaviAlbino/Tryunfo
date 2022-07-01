@@ -31,10 +31,10 @@ class Input extends React.Component {
         </label>
         <label htmlFor="rare-input">
           Carta Rara:
-          <select data-input="rare-input">
+          <select data-testid="rare-input">
             <option value="normal">normal</option>
             <option value="raro">raro</option>
-            <option value="muito-raro">muito raro</option>
+            <option value="muito raro">muito raro</option>
           </select>
         </label>
         <label htmlFor="trunfo-input">
