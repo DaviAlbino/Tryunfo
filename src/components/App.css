@@ -11,3 +11,12 @@
   justify-content: space-evenly;
   width: max-content;
 }
+
+label input {
+  margin: 20px;
+}
+
+.card {
+  align-self: auto;
+  display: flex;
+}
