@@ -72,11 +72,11 @@ class App extends React.Component {
   onSaveButtonClick = (event) => {
     event.preventDefault();
     const { cardTrunfo } = this.state;
-    if (cardTrunfo) {
-      this.setState({
-        hasTrunfo: true,
-      });
-    }
+    // if (cardTrunfo) {
+    //   this.setState({
+    //     hasTrunfo: true,
+    //   });
+    // }
     const { cardName,
       cardDescription,
       cardImage,
@@ -111,9 +111,24 @@ class App extends React.Component {
       cardAttr2: '0',
       cardAttr3: '0',
       cardTrunfo: false,
-      hasTrunfo: true,
+      hasTrunfo: !!cardTrunfo,
       isSaveButtonDisabled: true,
     }));
+  }
+
+  deleteCardBtn = ({ target }) => {
+    const { myDeck } = this.state;
+    const filteredDeck = myDeck
+      .filter((cardFromDeck) => cardFromDeck.cardName !== target.id);
+    console.log(target.value);
+    if (target.value) {
+      this.setState({
+        myDeck: filteredDeck,
+        hasTrunfo: false,
+      });
+    } else {
+      this.setState({ myDeck: filteredDeck });
+    }
   }
 
   render() {
@@ -171,6 +186,7 @@ class App extends React.Component {
               cardRare={ cardFromDeck.cardRare }
               cardTrunfo={ cardFromDeck.cardTrunfo }
               cardDescription={ cardFromDeck.cardDescription }
+              deleteCardBtn={ this.deleteCardBtn }
             />
           )) }
         </div>

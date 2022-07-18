@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import './App.css';
 
 class MyDeck extends React.Component {
-  handleSubmit = (event) => {
-    event.preventDefault();
-  }
-
   render() {
     const { cardName,
       cardDescription,
@@ -16,6 +12,7 @@ class MyDeck extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      deleteCardBtn,
       // hasTrunfo,
     } = this.props;
 
@@ -42,6 +39,16 @@ class MyDeck extends React.Component {
         <div>
           { cardTrunfo && <p data-testid="trunfo-card">Super Trunfo</p> }
         </div>
+        <button
+          type="button"
+          data-testid="delete-button"
+          id={ cardName }
+          onClick={ deleteCardBtn }
+          value={ cardTrunfo }
+        >
+          Excluir
+
+        </button>
       </div>
     );
   }
