@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './components/Form';
 import './components/App.css';
 import Card from './components/Card';
+import MyDeck from './components/MyDeck';
 
 class App extends React.Component {
   constructor() {
@@ -126,6 +127,7 @@ class App extends React.Component {
       cardTrunfo,
       isSaveButtonDisabled,
       hasTrunfo,
+      myDeck,
     } = this.state;
     return (
       <div className="App">
@@ -156,6 +158,22 @@ class App extends React.Component {
           cardDescription={ cardDescription }
           // hasTrunfo={ hasTrunfo }
         />
+        <div>
+          { myDeck && myDeck.map((cardFromDeck, index) => (
+            <MyDeck
+              key={ index }
+              cardName={ cardFromDeck.cardName }
+              className="card"
+              cardAttr1={ cardFromDeck.cardAttr1 }
+              cardAttr2={ cardFromDeck.cardAttr2 }
+              cardAttr3={ cardFromDeck.cardAttr3 }
+              cardImage={ cardFromDeck.cardImage }
+              cardRare={ cardFromDeck.cardRare }
+              cardTrunfo={ cardFromDeck.cardTrunfo }
+              cardDescription={ cardFromDeck.cardDescription }
+            />
+          )) }
+        </div>
       </div>
     );
   }
