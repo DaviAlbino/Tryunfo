@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './App.css';
 
-// onInputChange = (event) => {
-//   this.setState({ cardName: event.target.value });
-// };
-
 class Input extends React.Component {
+  handleSubmit = (event) => {
+    event.preventDefault();
+  }
+
   render() {
     const {
       cardName,
@@ -17,7 +18,7 @@ class Input extends React.Component {
       cardRare,
       cardTrunfo,
       hasTrunfo,
-      isSaveButtonDisable,
+      isSaveButtonDisabled,
       onInputChange,
       onSaveButtonClick,
     } = this.props;
@@ -103,22 +104,30 @@ class Input extends React.Component {
             <option value="muito raro">muito raro</option>
           </select>
         </label>
-        <label htmlFor="trunfo-input">
-          Super Trunfo:
-          <input
-            type="checkbox"
-            name="cardTrunfo"
-            checked={ cardTrunfo }
-            onChange={ onInputChange }
-            id="trunfo-input"
-            data-testid="trunfo-input"
-          />
-        </label>
+        {
+          !hasTrunfo
+            ? (
+              <label htmlFor="trunfo-input">
+                Super Trunfo:
+                <input
+                  type="checkbox"
+                  name="cardTrunfo"
+                  checked={ cardTrunfo }
+                  onChange={ onInputChange }
+                  id="trunfo-input"
+                  data-testid="trunfo-input"
+                />
+              </label>
+            )
+            : (<p>Você já tem um Super Trunfo em seu baralho</p>)
+
+        }
         <button
           data-testid="save-button"
           type="submit"
-          disabled={ isSaveButtonDisable }
+          disabled={ isSaveButtonDisabled }
           onClick={ onSaveButtonClick }
+          onSubmit={ this.handleSubmit }
         >
           Salvar
 
@@ -127,5 +136,20 @@ class Input extends React.Component {
     );
   }
 }
+
+Input.propTypes = {
+  cardName: PropTypes.string,
+  cardDescription: PropTypes.string,
+  cardAttr1: PropTypes.string,
+  cardAttr2: PropTypes.string,
+  cardAttr3: PropTypes.string,
+  cardImage: PropTypes.string,
+  cardRare: PropTypes.string,
+  cardTrunfo: PropTypes.boolean,
+  hasTrunfo: PropTypes.boolean,
+  isSaveButtonDisabled: PropTypes.boolean,
+  onInputChange: PropTypes.function,
+  onSaveButtonClick: PropTypes.function,
+}.isRequired;
 
 export default Input;
