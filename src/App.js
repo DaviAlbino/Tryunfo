@@ -3,6 +3,7 @@ import Form from './components/Form';
 import './components/App.css';
 import Card from './components/Card';
 import MyDeck from './components/MyDeck';
+import Filters from './components/Filters';
 
 class App extends React.Component {
   constructor() {
@@ -20,6 +21,10 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       hasTrunfo: false,
       myDeck: [],
+      searchName: '',
+      searchRareCard: 'todas',
+      searchTrunfo: false,
+      disabledRarity: false,
     };
   }
 
@@ -72,11 +77,6 @@ class App extends React.Component {
   onSaveButtonClick = (event) => {
     event.preventDefault();
     const { cardTrunfo } = this.state;
-    // if (cardTrunfo) {
-    //   this.setState({
-    //     hasTrunfo: true,
-    //   });
-    // }
     const { cardName,
       cardDescription,
       cardImage,
@@ -88,7 +88,6 @@ class App extends React.Component {
       hasTrunfo,
       isSaveButtonDisabled,
     } = this.state;
-
     const newStates = {
       cardName,
       cardDescription,
@@ -131,6 +130,45 @@ class App extends React.Component {
     }
   }
 
+  handleFilter = ({ target }) => {
+    const { myDeck } = this.state;
+    const { name, type, checked, value } = target;
+    this.setState({ [name]: type === 'checkbox'
+      ? checked : value,
+    });
+
+    if (name === 'searchName') {
+      const filteredByName = myDeck.filter((card) => card.cardName.includes(value));
+      this.setState({
+        myDeck: [...filteredByName],
+      });
+    }
+
+    if (name === 'searchRareCard') {
+      if (value === 'todas') {
+        this.setState({ myDeck });
+      } else {
+        const filteredByRarity = myDeck.filter((card) => card.cardRare.includes(value));
+        this.setState({
+          myDeck: [...filteredByRarity],
+        });
+      }
+    }
+
+    if (checked) {
+      const filteredByTrunfo = myDeck.filter((card) => card.cardTrunfo === true);
+      this.setState({
+        myDeck: [...filteredByTrunfo],
+        disabledRarity: true,
+      });
+    } else {
+      this.setState({
+        myDeck,
+        disabledRarity: false,
+      });
+    }
+  }
+
   render() {
     const { cardName,
       cardDescription,
@@ -143,6 +181,10 @@ class App extends React.Component {
       isSaveButtonDisabled,
       hasTrunfo,
       myDeck,
+      searchName,
+      searchRareCard,
+      searchTrunfo,
+      disabledRarity,
     } = this.state;
     return (
       <div className="App">
@@ -174,6 +216,15 @@ class App extends React.Component {
           // hasTrunfo={ hasTrunfo }
         />
         <div>
+          <form>
+            <Filters
+              searchName={ searchName }
+              searchRareCard={ searchRareCard }
+              searchTrunfo={ searchTrunfo }
+              handleFilter={ this.handleFilter }
+              disabledRarity={ disabledRarity }
+            />
+          </form>
           { myDeck && myDeck.map((cardFromDeck, index) => (
             <MyDeck
               key={ index }

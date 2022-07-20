@@ -13,7 +13,6 @@ class MyDeck extends React.Component {
       cardRare,
       cardTrunfo,
       deleteCardBtn,
-      // hasTrunfo,
     } = this.props;
 
     return (
