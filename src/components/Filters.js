@@ -39,7 +39,7 @@ class Filters extends React.Component {
             <option value="todas">todas</option>
             <option value="normal">normal</option>
             <option value="raro">raro</option>
-            <option value="muito-raro">muito raro</option>
+            <option value="muito raro">muito raro</option>
           </select>
           <label htmlFor="trunfo-filter">
             <input

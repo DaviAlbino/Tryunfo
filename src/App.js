@@ -155,17 +155,19 @@ class App extends React.Component {
       }
     }
 
-    if (checked) {
-      const filteredByTrunfo = myDeck.filter((card) => card.cardTrunfo === true);
-      this.setState({
-        myDeck: [...filteredByTrunfo],
-        disabledRarity: true,
-      });
-    } else {
-      this.setState({
-        myDeck,
-        disabledRarity: false,
-      });
+    if (name === 'searchTrunfo') {
+      if (checked) {
+        const filteredByTrunfo = myDeck.filter((card) => card.cardTrunfo === true);
+        this.setState({
+          myDeck: [...filteredByTrunfo],
+          disabledRarity: true,
+        });
+      } else {
+        this.setState({
+          myDeck,
+          disabledRarity: false,
+        });
+      }
     }
   }
 
@@ -213,7 +215,6 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
           cardDescription={ cardDescription }
-          // hasTrunfo={ hasTrunfo }
         />
         <div>
           <form>
